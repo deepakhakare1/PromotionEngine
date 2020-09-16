@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PromotionEngine
 {
-    class Program
+    public class PromotionEngineRule
     {
         static void Main(string[] args)
         {
