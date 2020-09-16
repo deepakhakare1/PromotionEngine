@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,8 +12,16 @@ namespace PromotionEngine
     {
         static void Main(string[] args)
         {
+            var promotionPrice= GetPromotionEngineResult();
+            Console.ReadLine();
+
+        }
+
+        public static decimal GetPromotionEngineResult()
+        {
             //create list of promotions
             //we need to add information about Product's count
+            decimal promoprice=0m;
             Dictionary<String, int> d1 = new Dictionary<String, int>();
             d1.Add("A", 3);
             Dictionary<String, int> d2 = new Dictionary<String, int>();
@@ -42,11 +52,11 @@ namespace PromotionEngine
                     .Select(promo => PromotionChecker.GetTotalPrice(ord, promo))
                     .ToList();
                 decimal origprice = ord.Products.Sum(x => x.Price);
-                decimal promoprice = promoprices.Sum();
+                promoprice = promoprices.Sum();
 
                 Console.WriteLine($"OrderID: {ord.OrderID} => Original price: {origprice.ToString("0.00")} | Rebate Price: {(origprice - promoprice).ToString("0.00")} | Total Price: {(promoprice).ToString("0.00")}");
-                Console.ReadLine();
             }
+            return promoprice;
         }
     }
 }
